@@ -1,6 +1,7 @@
 package main.java;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -37,8 +38,8 @@ public class Solution_1612 {
         List<Character> list2 = new ArrayList<>();
         this.toList(root1, list1);
         this.toList(root2, list2);
-        list1.sort((Character a, Character b) -> a - b);
-        list2.sort((Character a, Character b) -> a - b);
+        list1.sort(Comparator.comparingInt((Character a) -> a));
+        list2.sort(Comparator.comparingInt((Character a) -> a));
         return IntStream.range(0, list1.size()).noneMatch(i -> list1.get(i) != list2.get(i));
     }
 }
