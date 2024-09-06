@@ -16,7 +16,7 @@ public class Solution_2316 {
         });
         boolean[] vis = new boolean[n];
         int pre = 0;
-        int cur = 0;
+        int cur;
         long sum = 0;
         for (int i = 0; i < n; i++)
             if (!vis[i]) {
