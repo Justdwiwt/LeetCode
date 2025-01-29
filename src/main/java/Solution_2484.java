@@ -1,20 +1,27 @@
 package main.java;
 
+import java.util.stream.IntStream;
+
 public class Solution_2484 {
     public int countPalindromes(String s) {
-        int ans = 0;
-        int len = s.length();
-        int[][] dp = new int[len][len];
-        for (int i = len - 2; i >= 0; --i)
-            for (int j = i + 2; j < len; ++j) {
-                dp[i][j] = dp[i][j - 1] + dp[i + 1][j] - dp[i + 1][j - 1];
-                if (s.charAt(i) == s.charAt(j)) {
-                    dp[i][j] += j - i - 1;
-                    dp[i][j] %= 1000000007;
-                    if (j - i >= 4) ans += dp[i + 1][j - 1];
-                    ans %= 1000000007;
-                }
-            }
-        return ans;
+        long[] pre = new long[10], suf = new long[10];
+        long[][] prePre = new long[10][10], sufSuf = new long[10][10];
+        for (int i = s.length() - 1; i >= 0; i--) {
+            int num = s.charAt(i) - '0';
+            IntStream.range(0, 10).forEach(j -> sufSuf[num][j] += suf[j]);
+            suf[num]++;
+        }
+        long res = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int num = s.charAt(i) - '0';
+            suf[num]--;
+            IntStream.range(0, 10).forEach(j -> sufSuf[num][j] -= suf[j]);
+            for (int j = 0; j < 10; j++)
+                for (int k = 0; k < 10; k++)
+                    res += prePre[j][k] * sufSuf[j][k];
+            IntStream.range(0, 10).forEach(j -> prePre[num][j] += pre[j]);
+            pre[num]++;
+        }
+        return (int) (res % 1_000_000_007);
     }
 }
