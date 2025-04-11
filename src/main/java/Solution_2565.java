@@ -4,7 +4,10 @@ import java.util.Arrays;
 
 public class Solution_2565 {
     public int minimumScore(String s, String t) {
-        int m = s.length(), n = t.length(), left[] = new int[m], right[] = new int[m];
+        int m = s.length();
+        int n = t.length();
+        int[] left = new int[m];
+        int[] right = new int[m];
         Arrays.fill(left, -1);
         Arrays.fill(right, n);
         for (int i = 0, j = 0; i < m; i++)
