@@ -2,7 +2,7 @@ package main.java;
 
 import java.util.Arrays;
 
-public class Solution_2394 {
+public class Solution_2594 {
     public long repairCars(int[] ranks, int cars) {
         long left = 1;
         long right = (long) 1e14;
