@@ -4,19 +4,17 @@ import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class Solution_2731 {
+    static final int MOD = 1000000007;
+
     public int sumDistance(int[] nums, String s, int d) {
-        int len = nums.length;
-        IntStream.range(0, len).forEach(i -> nums[i] += (d * (s.charAt(i) == 'R' ? 1 : -1)));
-        int mod = (int) 1e9 + 7;
-        long ans = 0;
-        Arrays.sort(nums);
-        int sum = 0;
-        long preSum = 0;
-        for (int i = 1; i < len; i++) {
-            preSum = (preSum + ((long) nums[i] - nums[i - 1]) * i) % mod;
-            ans += preSum;
-            ans %= mod;
+        int n = nums.length;
+        long[] pos = IntStream.range(0, n).mapToLong(i -> s.charAt(i) == 'L' ? (long) nums[i] - d : (long) nums[i] + d).toArray();
+        Arrays.sort(pos);
+        long res = 0;
+        for (int i = 1; i < n; i++) {
+            res += (pos[i] - pos[i - 1]) * i % MOD * (n - i) % MOD;
+            res %= MOD;
         }
-        return (int) ans;
+        return (int) res;
     }
 }
