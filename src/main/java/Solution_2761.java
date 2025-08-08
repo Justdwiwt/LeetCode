@@ -1,6 +1,7 @@
 package main.java;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Solution_2761 {
@@ -24,12 +25,12 @@ public class Solution_2761 {
     public List<List<Integer>> findPrimePairs(int n) {
         List<List<Integer>> ans = new ArrayList<>();
         if ((n & 1) == 1) {
-            if (n > 1 && PRIMES[n - NP[0]]) ans.add(List.of(2, n - 2));
+            if (n > 1 && PRIMES[n - NP[0]]) ans.add(Arrays.asList(2, n - 2));
             return ans;
         }
         int half = n >> 1;
         for (int i = 0; i < primeLen && NP[i] <= half; i++)
-            if (PRIMES[n - NP[i]]) ans.add(List.of(NP[i], n - NP[i]));
+            if (PRIMES[n - NP[i]]) ans.add(Arrays.asList(NP[i], n - NP[i]));
         return ans;
     }
 }
