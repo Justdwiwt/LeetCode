@@ -1,6 +1,6 @@
 package main.java;
 
-public class Solution_2764 {
+public class Solution_2765 {
     public int alternatingSubarray(int[] nums) {
         int ans = -1;
         int length = -1;
